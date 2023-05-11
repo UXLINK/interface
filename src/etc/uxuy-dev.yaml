@@ -1,0 +1,14 @@
+Name: uxuy-interface
+Host: 0.0.0.0
+Port: 8080
+Mode: dev
+Verbose: true
+NodeId: 1
+Timeout: 50000
+Log:
+  Encoding: json
+  Level: info
+JwtAuth:
+  AccessSecret: "GZCp7FvIJ5wPs8kQTvEhmlZO"
+  AccessExpire: 31536000 # 365天
+  RefreshExpire: 34560000 # 400天
