@@ -1,0 +1,10 @@
+///
+/// 具体语法请参考 https://go-zero.dev/cn/docs/design/grammar
+/// 具体配置请参考 https://go-zero.dev/cn/docs/configuration/api
+///
+
+syntax = "v1"
+
+import (
+	"interfa.api"
+)

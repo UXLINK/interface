@@ -1,0 +1,76 @@
+syntax = "v1"
+
+type AuthResp{
+    Token string `json:"token"`
+}
+type RecommendReq{
+    Limit int64 `form:"limit"`
+    Cursor string `form:"cursor,optional"`
+}
+type RecommendListResp{
+    Cursor string `json:"cursor"`
+    list []RecommendUser `json:"list"`
+}
+type RecommendUser{
+    UxuyId string `json:"uxuyId"`
+    Name string `json:"name"`
+    Avatar string `json:"avatar"`
+    RecommendReason string `json:"recommendReason"`
+}
+type UserInfoReq{
+    Address string `form:"address"`
+}
+type UserInfoResp{
+    UxuyId string `json:"uxuyId"`
+    Name string `json:"name"`
+    Avatar string `json:"avatar"`
+    Did string `json:"did"`
+    CreatedAt string `json:"createdAt"`
+}
+type AddressReq{
+    Did string `form:"did"`
+}
+type AddressResp{
+    Address string `json:"address"`
+}
+type NameReq{
+    Address string `form:"address"`
+}
+type NameResp{
+    Did string `json:"did"`
+}
+type UserMpcKeyReq{
+    Address string `form:"address"`
+}
+type UserMpcKeyResp{
+    MpcKey string `json:"mpcKey"`
+}
+
+@server(
+    prefix: api/v1
+    group: interfa
+    middleware: ApiKey
+)
+service uxuy {
+    @handler Auth
+    post /auth returns (AuthResp)
+}
+
+@server(
+    prefix: api/v1
+    jwt: JwtAuth
+    group: interfa
+    middleware: ApiKey
+)
+service uxuy {
+    @handler Recommend
+    get /recommend (RecommendReq)  returns (RecommendListResp)
+    @handler UserInfo
+    get /userInfo (UserInfoReq)  returns (UserInfoResp)
+    @handler GetAddress
+    get /getAddress (AddressReq)  returns (AddressResp)
+    @handler GetName
+    get /getName (NameReq)  returns (NameResp)
+    @handler UserMpcKey
+    get /getUserMpcKey (UserMpcKeyReq)  returns (UserMpcKeyResp)
+}
